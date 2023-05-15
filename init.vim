@@ -69,6 +69,7 @@ Plug 'aldur/vim-algorand-teal'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'mbbill/undotree'
 
 " Python packages
 " Plug 'python-mode/python-mode'
@@ -95,11 +96,11 @@ Plug 'morhetz/gruvbox'
 " Plug 'altercation/vim-colors-solarized'
 "Plug 'lancekrogers/vim-colorstepper'
 
-" Nvim
+" Neovim Specific plugins
+Plug 'VonHeikemen/lsp-zero.nvim'
 Plug 'brooth/far.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'nvim-lualine/lualine.nvim'
-" If you want to have icons in your statusline choose one of these
 Plug 'kyazdani42/nvim-web-devicons'
 
 " search
@@ -127,13 +128,9 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
 
-" Neovim Specific plugins
-Plug 'VonHeikemen/lsp-zero.nvim'
-
 call plug#end()
 
 set clipboard+=unnamedplus
-
 
 " Enable folding
 set foldmethod=indent |
@@ -172,8 +169,6 @@ au BufNewFile,BufRead *.sh,*.vimrc
     \ set expandtab |
     \ set autoindent |
     \ set fileformat=unix |
-
-
 set encoding=utf-8
 
 set fdm=marker
@@ -220,17 +215,12 @@ function! ToggleColorScheme()
   endif
 endfunction
 
-" call togglebg#map("<F4>")
-
 let NERDTreeIgnore=['\.pyc$', '\~$', '__pycache__'] "ignore files in NERDTree
 
 " enable line numbers
 let NERDTreeShowLineNumbers=1
 " make sure relative line numbers are used
 autocmd FileType nerdtree setlocal relativenumber
-
-
-
 
 " Terminal settings
 tnoremap <Esc> <C-\><C-n>
@@ -387,8 +377,7 @@ nnoremap <leader><c-p> :FZF<cr>
 nnoremap <c-p> <cmd>Telescope find_files<cr>  
 
 
-" Open current file in a browser
-nmap <F5> :w <Bar> !xdg-open %<CR>
+nmap <F5> :UndotreeToggle<CR>
 
 
 let g:NERDSpaceDelims = 1
@@ -458,9 +447,6 @@ let g:winresizer_start_key = '<C-T>'
 " If you want to cancel and quit window resize mode by `z` (keycode 122)
 let g:winresizer_keycode_cancel = 122
 
-" LUA_REPLACED
-" lua require('neoscroll').setup() 
-
 " Golang
 au FileType go set noexpandtab
 au FileType go set shiftwidth=4
@@ -493,108 +479,6 @@ set shortmess+=c
 " rust-tools will configure and enable certain LSP features for us.
 " See https://github.com/simrat39/rust-tools.nvim#configuration
 set completeopt=menu,menuone,noselect
-lua <<EOF
--- Setup nvim-cmp. 
-local cmp = require'cmp'
-
-cmp.setup({
-  snippet = {
-    -- REQUIRED - you must specify a snippet engine
-    expand = function(args)
-      vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-      -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-      -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
-      -- require'snippy'.expand_snippet(args.body) -- For `snippy` users.
-    end,
-  },
-  mapping = {
-    ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-    ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
-    ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-    ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
-    ['<C-e>'] = cmp.mapping({
-      i = cmp.mapping.abort(),
-      c = cmp.mapping.close(),
-    }),
-    ['<CR>'] = cmp.mapping.confirm({ select = true }),
-  },
-  sources = cmp.config.sources({
-    { name = 'nvim_lsp' },
-    { name = 'vsnip' }, -- For vsnip users.
-    -- { name = 'luasnip' }, -- For luasnip users.
-    -- { name = 'ultisnips' }, -- For ultisnips users.
-    -- { name = 'snippy' }, -- For snippy users.
-  }, {
-    { name = 'buffer' },
-  })
-})
-
--- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline('/', {
-  sources = {
-    { name = 'buffer' }
-  }
-})
-
--- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline(':', {
-  sources = cmp.config.sources({
-    { name = 'path' }
-  }, {
-    { name = 'cmdline' }
-  })
-})
-
--- Setup lspconfig.
-local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
-
-local nvim_lsp = require'lspconfig'
-
-local opts = {
-    tools = { -- rust-tools options
-        autoSetHints = true,
-        --hover_with_actions = true,
-        inlay_hints = {
-            show_parameter_hints = true,
-            parameter_hints_prefix = "",
-            other_hints_prefix = "",
-        },
-    },
-  capabilities = capabilities,
-
-    -- all the opts to send to nvim-lspconfig
-    -- these override the defaults set by rust-tools.nvim
-    -- see https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#rust_analyzer
-    server = {
-        -- on_attach is a callback called when the language server attachs to the buffer
-        -- on_attach = on_attach,
-        settings = {
-            -- to enable rust-analyzer settings visit:
-            -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
-            ["rust-analyzer"] = {
-                -- enable clippy on save
-                checkOnSave = {
-                    command = "clippy"
-                },
-            }
-        }
-    },
-}
-require('rust-tools').setup(opts)
-require('lualine').setup({
-    options = { 
-        theme = 'gruvbox',
-        icons_enabled = true,
-        globalstatus = true,
-    }
-})
-require("kanban").setup({
-  markdown = {
-    description_folder = "./tasks/", -- Path to save the file corresponding to the task.
-    list_head = "## ",
-  }
-})
-EOF
 
 " Code navigation shortcuts
 nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
