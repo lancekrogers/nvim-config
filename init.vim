@@ -16,7 +16,7 @@ Plug 'xolox/vim-notes'
 " Plug 'vimwiki/vimwiki'
 
 " Other Tools
-Plug 'tpope/vim-surround'
+Plug 'tpope/vim-surround' 
 Plug 'preservim/nerdcommenter'
 Plug 'Konfekt/FastFold'
 
@@ -26,7 +26,6 @@ Plug 'dhruvasagar/vim-table-mode'
 
 Plug 'xolox/vim-misc'
 Plug 'mhinz/vim-crates'
-Plug 'karb94/neoscroll.nvim'
 Plug 'simeji/winresizer'
 Plug 'lancekrogers/vim-log-highlighting'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -50,7 +49,6 @@ Plug 'ap/vim-css-color'
 "Plug 'KabbAmine/zeavim.vim'
 
 " Syntax Stuff
-" Plug 'dense-analysis/ale'
 
 " Syntax Highlighing
 Plug 'sheerun/vim-polyglot'
@@ -70,9 +68,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'mbbill/undotree'
-
-" Python packages
-" Plug 'python-mode/python-mode'
 
 " Doesn't work on popos desktop for some unknown reason
 Plug 'nvie/vim-flake8'
@@ -102,6 +97,7 @@ Plug 'brooth/far.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
+Plug 'karb94/neoscroll.nvim'
 
 " search
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
@@ -171,7 +167,7 @@ au BufNewFile,BufRead *.sh,*.vimrc
     \ set fileformat=unix |
 set encoding=utf-8
 
-set fdm=marker
+" set fdm=marker
 
 let python_highlight_all=1
 syntax on
@@ -303,15 +299,6 @@ nnoremap <leader>cn :cnext<CR>
 nnoremap <leader>cp :cprev<CR>
 
 
-" Javascript
-let g:ale_linters = {
-            \'javascript': ['eslint'],
-            \'python': ['flake8'] 
-            \}
-let g:ale_javascript_eslint_exectuabl='npx eslint'
-let g:ale_disable_lsp =1
-" let g:ale_echo_cursor = 0
-
 " Tern go to definition enable keyboard shortcuts
 let g:tern_map_keys=1
 
@@ -376,15 +363,11 @@ let g:fzf_layout = { 'down': '~40%' }
 nnoremap <leader><c-p> :FZF<cr>
 nnoremap <c-p> <cmd>Telescope find_files<cr>  
 
-
 nmap <F5> :UndotreeToggle<CR>
-
 
 let g:NERDSpaceDelims = 1
 
-
 " let g:AutocorrectFiletypes = ["text","markdown","tex"]
-
 
 " Notes
 let g:notes_directories = ['~/Desktop/Notes']
@@ -398,7 +381,6 @@ let g:rustfmt_autosave = 1
 if has('nvim')
   autocmd BufRead Cargo.toml call crates#toggle()
 endif
-
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
@@ -464,9 +446,6 @@ let g:go_highlight_types = 1
 let g:go_auto_sameids = 1
 let g:go_fmt_command = "goimports"
 " Error and warning signs.
-let g:ale_sign_error = '⤫'
-let g:ale_sign_warning = '⚠'
-let g:airline#extensions#ale#enabled = 1
 let g:go_auto_type_info = 1
 let g:go_addtags_transform = "snakecase"
 
@@ -499,7 +478,6 @@ set updatetime=300
 " Goto previous/next diagnostic warning/error
 nnoremap <silent> g[ <cmd>lua vim.diagnostic.goto_prev()<CR>
 nnoremap <silent> g] <cmd>lua vim.diagnostic.goto_next()<CR>
-
 
 " Reload
 nnoremap <leader>l <C-L>
