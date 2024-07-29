@@ -9,5 +9,4 @@ vim.opt.list = true
 vim.opt.timeoutlen = 5000
 vim.opt.listchars = "tab:>-,trail:."
 vim.opt.spelllang = "en_us"
---vim.treesitter.query.set("lua", "injections", "")
 vim.g.mapleader = "\\"
