@@ -31,15 +31,6 @@ map("n", "<LEADER>bb", function()
   require("bufferline").pick()
 end, { desc = "Select Buffer" })
 
--- AstroNvim-like explorer toggle
-map("n", "<LEADER>o", function()
-  if vim.bo.filetype == "neo-tree" then
-    vim.cmd.wincmd("p")
-  else
-    vim.cmd.Neotree("focus")
-  end
-end, { desc = "Toggle Explorer Focus" })
-
 -- Block indentation via tab and shift/tab
 map("v", "<TAB>", ">gv")
 map("v", "<S-TAB>", "<gv")

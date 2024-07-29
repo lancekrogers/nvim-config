@@ -158,7 +158,7 @@ return {
       { ",v", "<cmd>VenvSelect<cr>" },
     },
   },
-  { "dhruvasagar/vim-table-mode" },
+  -- { "dhruvasagar/vim-table-mode" },
   { "chrisbra/csv.vim" },
   -- {
   --   'stevearc/oil.nvim',
