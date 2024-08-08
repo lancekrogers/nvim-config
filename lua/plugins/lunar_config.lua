@@ -176,4 +176,5 @@ return {
       vim.fn["mkdp#util#install"]()
     end,
   },
+  -- { "tiagovla/scope.nvim" },
 }

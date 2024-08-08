@@ -1,0 +1,26 @@
+-- return {
+--
+--   {
+--     "akinsho/bufferline.nvim",
+--     version = "*",
+--     dependencies = "nvim-tree/nvim-web-devicons",
+--     opts = {
+--       options = {
+--         -- stylua: ignore
+--       custom_filter = function(buf_number)
+--       -- Get the current tabpage number
+--       local current_tab = vim.api.nvim_get_current_tabpage()
+--       -- Get all buffers in the current tabpage
+--       local tab_buffers = vim.api.nvim_tabpage_list_wins(current_tab)
+--       -- Check if the buffer belongs to the current tabpage
+--       for _, win in ipairs(tab_buffers) do
+--         if buf_number == vim.api.nvim_win_get_buf(win) then
+--           return true
+--         end
+--       end
+--       return false
+--     end,
+--       },
+--     },
+--   },
+-- }

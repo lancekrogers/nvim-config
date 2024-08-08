@@ -10,3 +10,4 @@ vim.opt.timeoutlen = 5000
 vim.opt.listchars = "tab:>-,trail:."
 vim.opt.spelllang = "en_us"
 vim.g.mapleader = "\\"
+-- vim.g.lazyvim_python_lsp = "basedpyright"
