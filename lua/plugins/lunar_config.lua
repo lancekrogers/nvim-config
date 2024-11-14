@@ -177,4 +177,8 @@ return {
     end,
   },
   -- { "tiagovla/scope.nvim" },
+  {
+    "folke/noice.nvim",
+    enabled = false,
+  },
 }
