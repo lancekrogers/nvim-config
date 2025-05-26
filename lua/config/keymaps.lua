@@ -30,6 +30,11 @@ vim.keymap.set("v", "<leader>mc", "!mdtable2csv<cr>")
 -- map("n", "<leader>c", "<cmd>:bd<cr>", { desc = "Delete Buffer", opts = "buffer" })
 --vim.keymap.set("t", "<C-q>", "<C-\\><C-n>:q<CR>", { desc = "Quit terminal split" })
 
+-- vim.keymap.set("n", "<leader>cn", ":cnext<CR>")
+-- vim.keymap.set("n", "<leader>cp", ":cprev<CR>")
+-- vim.keymap.set("n", "<leader>co", ":copen<CR>")
+-- vim.keymap.set("n", "<leader>cc", ":cclose<CR>")
+
 vim.cmd([[
   tnoremap jk <C-\><C-n>
 ]])
