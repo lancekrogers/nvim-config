@@ -28,6 +28,11 @@ vim.keymap.set("n", "<leader>jf", ":%!jq .<cr>", { desc = "Format JSON" })
 vim.keymap.set("n", "//", ":Ag<SPACE>", { desc = "Silver Search" })
 vim.keymap.set("v", "<leader>mc", "!mdtable2csv<cr>")
 -- map("n", "<leader>c", "<cmd>:bd<cr>", { desc = "Delete Buffer", opts = "buffer" })
+--vim.keymap.set("t", "<C-q>", "<C-\\><C-n>:q<CR>", { desc = "Quit terminal split" })
+
+vim.cmd([[
+  tnoremap jk <C-\><C-n>
+]])
 
 -- AstroNvim-like buffer selection
 map("n", "<LEADER>bb", function()
