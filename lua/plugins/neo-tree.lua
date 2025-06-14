@@ -15,6 +15,11 @@ return {
         },
       },
       filesystem = {
+        filtered_items = {
+          visible = false,
+          hide_dotfiles = true,
+          hide_gitignored = true,
+        },
         commands = {
           scaffold = function(state)
             local node = state.tree:get_node()
@@ -46,10 +51,41 @@ return {
               vim.notify("❌ tree2scaffold failed:\n" .. output, vim.log.levels.ERROR)
             end
           end,
+
+          toggle_git_highlight = function()
+            local disable = not vim.g.neo_tree_git_highlight_disabled
+            vim.g.neo_tree_git_highlight_disabled = disable
+
+            local groups = {
+              "NeoTreeGitUnstaged",
+              "NeoTreeGitStaged",
+              "NeoTreeGitUntracked",
+              "NeoTreeGitIgnored",
+              "NeoTreeGitRenamed",
+              "NeoTreeGitDeleted",
+              "NeoTreeGitConflict",
+            }
+
+            if disable then
+              for _, group in ipairs(groups) do
+                vim.api.nvim_set_hl(0, group, { link = "Normal" })
+              end
+              vim.notify("🎨 Git highlighting disabled", vim.log.levels.INFO)
+            else
+              -- Reload the colorscheme to reset highlight groups to defaults
+              local scheme = vim.g.colors_name or "default"
+              vim.cmd.colorscheme(scheme)
+              vim.notify("🎨 Git highlighting enabled", vim.log.levels.INFO)
+            end
+
+            -- Refresh Neo-tree
+            vim.cmd("Neotree action=refresh source=filesystem")
+          end,
         },
         window = {
           mappings = {
-            ["<leader>t"] = "scaffold",
+            ["t2s"] = "scaffold",
+            -- ["s"] = "toggle_git_highlight",
           },
         },
       },
