@@ -16,6 +16,9 @@ return {
     "mason-org/mason-lspconfig.nvim",
     version = "1.32.0",
     servers = {
+      harper = {
+        filetypes = { "markdown" },
+      },
       pyright = nil,
       basedpyright = {
         settings = {
