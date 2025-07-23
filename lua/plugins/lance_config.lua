@@ -33,16 +33,16 @@ return {
     "kelly-lin/telescope-ag",
     dependencies = { "nvim-telescope/telescope.nvim" },
   },
-  {
-    "epwalsh/obsidian.nvim",
-    config = function()
-      vim.wo.conceallevel = 2
-      require("obsidian").setup({
-        dir = OBSIDIAN_PATH,
-        notes_subdir = "Notes",
-      })
-    end,
-  },
+  -- {
+  --   "epwalsh/obsidian.nvim",
+  --   config = function()
+  --     vim.wo.conceallevel = 2
+  --     require("obsidian").setup({
+  --       dir = OBSIDIAN_PATH,
+  --       notes_subdir = "Notes",
+  --     })
+  --   end,
+  -- },
   -- {
   --   "lancekrogers/kanban.nvim",
   --   config = function()
