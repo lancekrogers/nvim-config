@@ -3,7 +3,6 @@ return {
   opts = {
     servers = {
       basedpyright = {
-        mason = false, -- Let Mason handle the installation
         settings = {
           basedpyright = {
             analysis = {
