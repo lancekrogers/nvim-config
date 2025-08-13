@@ -33,7 +33,7 @@ return {
         },
       },
     },
-    ft = { "mmd", "mermaid" },
+    ft = { "mmd", "mermaid", "markdown", "md" },
     config = function()
       require("mermaider").setup({
         auto_render = true,
