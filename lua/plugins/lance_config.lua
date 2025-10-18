@@ -33,16 +33,16 @@ return {
     "kelly-lin/telescope-ag",
     dependencies = { "nvim-telescope/telescope.nvim" },
   },
-  {
-    "epwalsh/obsidian.nvim",
-    config = function()
-      vim.wo.conceallevel = 2
-      require("obsidian").setup({
-        dir = OBSIDIAN_PATH,
-        notes_subdir = "Notes",
-      })
-    end,
-  },
+  -- {
+  --   "epwalsh/obsidian.nvim",
+  --   config = function()
+  --     vim.wo.conceallevel = 2
+  --     require("obsidian").setup({
+  --       dir = OBSIDIAN_PATH,
+  --       notes_subdir = "Notes",
+  --     })
+  --   end,
+  -- },
   -- {
   --   "lancekrogers/kanban.nvim",
   --   config = function()
@@ -90,7 +90,7 @@ return {
       { "nvim-telescope/telescope.nvim", branch = "0.1.x", dependencies = { "nvim-lua/plenary.nvim" } },
     },
     lazy = false,
-    branch = "regexp", -- This is the regexp branch, use this for the new version
+    branch = "main", -- This is the regexp branch, use this for the new version
     config = function()
       require("venv-selector").setup({})
     end,

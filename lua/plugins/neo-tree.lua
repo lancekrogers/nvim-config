@@ -77,10 +77,33 @@ return {
           end,
         },
         window = {
+          width = "25%",
           mappings = {
             ["t2s"] = "scaffold",
           },
         },
+        --   components = {
+        --     created = function(config, node, state)
+        --       local stat = vim.uv.fs_stat(node:get_id())
+        --       local bt = stat and stat.birthtime and stat.birthtime.sec or nil
+        --       if bt then
+        --         return os.date("%Y-%m-%d %H:%M", bt)
+        --       end
+        --       return ""
+        --     end,
+        --   },
+        --   renderers = {
+        --     file = {
+        --       { "icon" },
+        --       { "name" },
+        --       { "last_modified", highlight = "NeoTreeLastModified" },
+        --     },
+        --     directory = {
+        --       { "icon" },
+        --       { "name" },
+        --       { "last_modified", highlight = "NeoTreeLastModified" },
+        --     },
+        --   },
       },
     },
   },
