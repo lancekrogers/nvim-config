@@ -27,3 +27,20 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
     vim.opt_local.spelllang = { "en_us" }
   end,
 })
+
+-- LSP log rotation (prevent logs from growing to 691MB and causing memory leaks)
+vim.api.nvim_create_autocmd("VimEnter", {
+  group = vim.api.nvim_create_augroup("lsp_log_rotation", { clear = true }),
+  callback = function()
+    local log_path = vim.fn.stdpath("log") .. "/lsp.log"
+    local max_size = 50 * 1024 * 1024 -- 50MB max
+
+    local stat = vim.loop.fs_stat(log_path)
+    if stat and stat.size > max_size then
+      -- Backup old log
+      vim.loop.fs_rename(log_path, log_path .. ".old")
+      -- Old backup will be overwritten next time
+      vim.notify("LSP log rotated (was " .. math.floor(stat.size / 1024 / 1024) .. "MB)", vim.log.levels.INFO)
+    end
+  end,
+})

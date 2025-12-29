@@ -11,3 +11,6 @@ vim.opt.listchars = "tab:>-,trail:."
 vim.opt.spelllang = "en_us"
 vim.g.mapleader = "\\"
 -- vim.g.lazyvim_python_lsp = "basedpyright"
+
+-- LSP logging configuration (prevent memory leaks from verbose logging)
+vim.lsp.set_log_level("ERROR") -- Only log errors, not every keystroke
