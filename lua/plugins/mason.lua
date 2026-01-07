@@ -1,11 +1,8 @@
--- mason and mason-lspconfig released version 2.0.
--- with some breaking changes, multiple methods have been changed
--- therefore (for now) a workaround is needed for Mason to still work in LazyVim
--- THIS WILL PIN the VERSION number, remove this file later, when it's no longer needed
+-- Mason and mason-lspconfig configuration
+-- Using latest versions (2.0+) which are now compatible with LazyVim
 return {
   {
     "mason-org/mason.nvim",
-    version = "1.11.0",
     opts = {
       ensured_installed = {
         "basedpyright",
@@ -14,7 +11,6 @@ return {
   },
   {
     "mason-org/mason-lspconfig.nvim",
-    version = "1.32.0",
     servers = {
       harper = {
         filetypes = { "markdown" },
@@ -30,4 +26,3 @@ return {
     },
   },
 }
--- after adding/saving this file run :Lazy to potentially 're-install' the versions above

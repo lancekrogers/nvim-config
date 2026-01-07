@@ -3,7 +3,7 @@
 return {
   { import = "lazyvim.plugins.extras.coding.mini-comment" },
   {
-    "echasnovski/mini.comment",
+    "nvim-mini/mini.comment",
     opts = {
       mappings = {
         comment = "<LEADER>/",

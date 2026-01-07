@@ -2,20 +2,23 @@ return {
   "nvim-treesitter/nvim-treesitter",
   opts = function(_, opts)
     ------------------------------------------------------------------
-    -- 1. Register the parser ---------------------------------------
+    -- 1. Register the parser (new nvim-treesitter API) -------------
     ------------------------------------------------------------------
-    local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+    vim.api.nvim_create_autocmd("User", {
+      pattern = "TSUpdate",
+      callback = function()
+        require("nvim-treesitter.parsers").move = {
+          install_info = {
+            url = "https://github.com/tree-sitter-grammars/tree-sitter-move",
+            files = { "src/parser.c" },
+            branch = "saving",
+          },
+        }
+      end,
+    })
 
-    parser_config.move = { -- the new language key
-      install_info = {
-        url = "https://github.com/tree-sitter-grammars/tree-sitter-move",
-        files = { "src/parser.c" }, -- both must exist
-        branch = "saving",
-        -- the grammar repo uses `grammar.js`, so the installer will
-        -- build the C sources automatically; no Node/npm needed.
-      },
-      filetype = "move",
-    }
+    -- Register the parser with the move filetype
+    vim.treesitter.language.register("move", "move")
 
     ------------------------------------------------------------------
     -- 2. Ask LazyVim to install it ----------------------------------
