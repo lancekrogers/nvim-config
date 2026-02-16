@@ -1,6 +1,7 @@
 -- nvim-token-counter: Display token counts in lualine status line
 return {
-  dir = "~/Dev/AI/obey-campaign/projects/nvim-token-counter",
+  -- dir = "~/Dev/AI/obey-campaign/projects/nvim-token-counter",
+  "lancekrogers/nvim-token-counter",
   dependencies = { "nvim-lualine/lualine.nvim" },
   event = "BufReadPost",
 
