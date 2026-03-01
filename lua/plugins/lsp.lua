@@ -6,6 +6,14 @@ return {
       pyright = function()
         return true
       end,
+      -- disable marksman (crash-loops on workspace scan, freezes neovim)
+      marksman = function()
+        return true
+      end,
+      -- disable textlsp (broken didChange support, spams errors)
+      textlsp = function()
+        return true
+      end,
     },
     servers = {
       pyright = nil, -- nuke it
@@ -20,7 +28,7 @@ return {
           basedpyright = {
             typeCheckingMode = "basic",
             pythonVersion = "3.11",
-            diagnosticMode = "workspace",
+            diagnosticMode = "openFilesOnly",
           },
         },
       },
