@@ -77,7 +77,7 @@ return {
           end,
         },
         window = {
-          width = "25%",
+          width = "fit_content",
           mappings = {
             ["t2s"] = "scaffold",
           },
