@@ -27,6 +27,14 @@ return {
       }
     end,
     opts = {
+      default_component_configs = {
+        type = { enabled = false },
+        created = { enabled = false },
+        last_modified = {
+          enabled = true,
+          required_width = 0,
+        },
+      },
       event_handlers = {
         {
           event = "neo_tree_buffer_enter",
@@ -82,28 +90,33 @@ return {
             ["t2s"] = "scaffold",
           },
         },
-        --   components = {
-        --     created = function(config, node, state)
-        --       local stat = vim.uv.fs_stat(node:get_id())
-        --       local bt = stat and stat.birthtime and stat.birthtime.sec or nil
-        --       if bt then
-        --         return os.date("%Y-%m-%d %H:%M", bt)
-        --       end
-        --       return ""
-        --     end,
-        --   },
-        --   renderers = {
-        --     file = {
-        --       { "icon" },
-        --       { "name" },
-        --       { "last_modified", highlight = "NeoTreeLastModified" },
-        --     },
-        --     directory = {
-        --       { "icon" },
-        --       { "name" },
-        --       { "last_modified", highlight = "NeoTreeLastModified" },
-        --     },
-        --   },
+        components = {
+          last_modified = function(config, node, state)
+            local stat = vim.uv.fs_stat(node:get_id())
+            if not stat then
+              return {}
+            end
+            local diff = os.time() - stat.mtime.sec
+            local text
+            if diff < 60 then
+              text = "just now"
+            elseif diff < 3600 then
+              text = math.floor(diff / 60) .. "m ago"
+            elseif diff < 86400 then
+              text = math.floor(diff / 3600) .. "h ago"
+            elseif diff < 604800 then
+              text = math.floor(diff / 86400) .. "d ago"
+            elseif diff < 2592000 then
+              text = math.floor(diff / 604800) .. "w ago"
+            else
+              text = "> 1mo ago"
+            end
+            return {
+              text = text,
+              highlight = config.highlight or "NeoTreeDimText",
+            }
+          end,
+        },
       },
     },
   },
