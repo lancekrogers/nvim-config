@@ -18,7 +18,7 @@ return {
       -- optional ⟹ override/extend default keys
       mappings = {
         -- follow or create link
-        follow_link = "<CR>",
+        follow_link = "gd",
         -- open http/https link in system browser
         open_in_browser = "gx",
         -- jump back after <CR>
